@@ -96,10 +96,16 @@ def url_to_filename(url):
     http://www.vsemirnyjbank.org/ru/country/tajikistan/publication/economic-update-fall-2020
     """
     url = url.split("/")
-    date = ''.join(url[6:9])
-    conttype = url[5]
-    title = url[9]
-    filename = f'{date}-{conttype}-{title}.txt'
+    try:
+        date = ''.join(url[6:9])
+        conttype = url[5]
+        title = url[9]
+        filename = f'{date}-{conttype}-{title}.txt'
+    except IndexError:
+        country = url[-3]
+        conttype = url[-2]
+        title = url[-1]
+        filename = f'{conttype}-{country}-{title}.txt'
 
     return filename
 
